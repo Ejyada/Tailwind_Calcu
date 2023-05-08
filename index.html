@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
+</head>
+<body class="bg-gray-200">
+  <div class="w-full sm:max-w-md mx-auto my-8 px-4">
+    <div class="w-64 mx-auto my-8">
+        <h2 class="text-center text-2xl font-bold mb-4">Simple Calculator</h2>
+        <div class="bg-gray-800 rounded-lg p-4">
+          <div class="flex justify-end mb-2">
+            <input id="result" class="appearance-none bg-white text-gray-700 mr-3 py-1 px-2">
+          </div>
+          <div class="grid grid-cols-4 gap-2">
+            <button onclick="clearResult()" class="col-span-2 bg-gray-700 hover:bg-blue-700 text-white font-bold py-2 rounded-lg">
+              AC
+            </button>
+            <button onclick="calculatePercentage()" class="bg-gray-700 hover:bg-blue-700 text-white font-bold py-2 rounded-lg">
+              %
+            </button>
+            <button onclick="appendOperator('/')" class="bg-yellow-500 hover:bg-blue-500 text-white font-bold py-2 rounded-lg">
+              /
+            </button>
+            <button onclick="appendNumber('7')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              7
+            </button>
+            <button onclick="appendNumber('8')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              8
+            </button>
+            <button onclick="appendNumber('9')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              9
+            </button>
+            <button onclick="appendOperator('*')" class="bg-yellow-500 hover:bg-blue-500 text-white font-bold py-2 rounded-lg">
+              *
+            </button>
+            <button onclick="appendNumber('4')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              4
+            </button>
+            <button onclick="appendNumber('5')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              5
+            </button>
+            <button onclick="appendNumber('6')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              6
+            </button>
+            <button onclick="appendOperator('-')" class="bg-yellow-500 hover:bg-blue-500 text-white font-bold py-2 rounded-lg">
+              -
+            </button>
+            <button onclick="appendNumber('1')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              1
+            </button>
+            <button onclick="appendNumber('2')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              2
+            </button>
+            <button onclick="appendNumber('3')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+              3
+          </button>
+          <button onclick="appendOperator('+')" class="bg-yellow-500 hover:bg-blue-500 text-white font-bold py-2 rounded-lg">
+            +
+          </button>
+          <button onclick="appendNumber('0')" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg col-span-2">
+            0
+          </button>
+          <button onclick="appendDecimal()" class="bg-gray-800 hover:bg-green-800 text-white font-bold py-2 rounded-lg">
+            .
+          </button>
+          <button onclick="calculate()" class="bg-yellow-500 hover:bg-blue-500 text-white font-bold py-2 rounded-lg">
+            =
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>  
+<script>
+let result = document.getElementById('result');
+let expression = '';
+
+function appendNumber(num) {
+  expression += num;
+  result.value = expression;
+}
+
+function appendOperator(operator) {
+  expression += operator;
+  result.value = expression;
+}
+
+function appendDecimal() {
+  if (!expression.includes('.')) {
+    expression += '.';
+    result.value = expression;
+  }
+}
+
+function clearResult() {
+  expression = '';
+  result.value = '';
+}
+
+function toggleSign() {
+  if (expression[0] === '-') {
+    expression = expression.slice(1);
+  } else {
+    expression = '-' + expression;
+  }
+  result.value = expression;
+}
+
+
+function calculatePercentage() {
+  const percentage = parseFloat(expression) / 100;
+  expression = percentage.toString();
+  result.value = expression;
+}
+
+function calculate() {
+  try {
+    const answer = eval(expression);
+    expression = answer.toString();
+    result.value = expression;
+  } catch (error) {
+    result.value = 'Error';
+  }
+}
+</script>
+
+</body>
+</html>
